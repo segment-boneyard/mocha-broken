@@ -6,8 +6,7 @@
   "dependencies": {
     "mocha": "^1.18.2",
     "quotemeta": "0.0.0",
-    "split": "^0.3.0",
-    "split-stream": "^0.2.0"
+    "split": "^0.3.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
