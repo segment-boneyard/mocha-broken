@@ -1,0 +1,11 @@
+{
+  "name": "mocha-broken",
+  "version": "0.0.0",
+  "repository": "segmentio/mocha-broken",
+  "dependencies": {
+    "mocha": "^1.18.2",
+    "quotemeta": "0.0.0",
+    "split": "^0.3.0",
+    "split-stream": "^0.2.0"
+  }
+}
