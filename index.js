@@ -33,7 +33,13 @@ ps.stdout.pipe(split()).on('data', function(line){
   if ('pass' == type) return delete broken[title];
   if ('fail' == type) return broken[title] = true;
   if ('end' == type) {
-    fs.writeFileSync(filename, JSON.stringify(broken));
+    if (Object.keys(broken).length) {
+      fs.writeFileSync(filename, JSON.stringify(broken));
+    } else {
+      try {
+        fs.unlinkSync(filename);
+      } catch (_) {}
+    }
   }
 });
 ps.stderr.pipe(process.stderr);
