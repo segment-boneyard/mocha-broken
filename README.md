@@ -27,6 +27,11 @@ $ mocha-broken
 
   Once all times pass, all are executed again.
 
+## TODO
+
+* pass flags and options to mocha
+* support mocha reporters
+
 ## Installation
 
 ```bash
