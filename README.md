@@ -25,7 +25,7 @@ $ mocha-broken
 ["end",{"suites":1,"tests":1,"passes":0,"pending":0,"failures":1,"start":"2014-04-06T01:09:08.654Z","end":"2014-04-06T01:09:08.663Z","duration":9}]
 ```
 
-  Once all times pass, all are executed again.
+  Once all tests pass, all are executed again.
 
 ## TODO
 
