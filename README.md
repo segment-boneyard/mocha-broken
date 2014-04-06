@@ -1,7 +1,8 @@
 
 # mocha-broken
 
-  Only run previously broken mocha tests.
+  Only run previously broken mocha tests. Really useful when individual tests
+  can take a long time.
 
 ## Example
 
@@ -17,7 +18,7 @@ $ mocha-broken
 
   Next time you run tests, only the failing are executed:
 
-```
+```bash
 $ mocha-broken
 ["start",{"total":2}]
 ["fail",{"title":"should break","fullTitle":"suite should break","duration":0}]
