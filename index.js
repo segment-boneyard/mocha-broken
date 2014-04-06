@@ -29,7 +29,7 @@ ps.stdout.pipe(split()).on('data', function(line){
 
   if ('start' == type) return;
   if ('pass' == type) return delete broken[title];
-  if ('broken' == type) return broken[title] = true;
+  if ('fail' == type) return broken[title] = true;
   if ('end' == type) {
     fs.writeFileSync(filename, JSON.stringify(broken));
   }
