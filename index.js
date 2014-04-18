@@ -4,10 +4,10 @@ var spawn = require('child_process').spawn;
 var split = require('split');
 var fs = require('fs');
 var quote = require('quotemeta');
-var mocha = require('mocha');
+var join = require('path').join;
 
 var broken = {};
-var bin = __dirname + '/node_modules/.bin/mocha';
+var bin = join(require.resolve('mocha'), '..', 'bin', 'mocha');
 var filename = process.cwd() + '/.mocha-broken';
 
 try {
