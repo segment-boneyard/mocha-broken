@@ -2,6 +2,7 @@
 
 var spawn = require('child_process').spawn;
 var split = require('split');
+var argv = require('minimist')(process.argv.slice(2), { '--': true });
 var fs = require('fs');
 var quote = require('quotemeta');
 var join = require('path').join;
@@ -14,7 +15,9 @@ try {
   broken = JSON.parse(fs.readFileSync(filename, 'utf8'));
 } catch (_) {}
 
-var args = ['--reporter', 'json-stream'];
+var args = argv['--'] || [];
+args.push('--reporter', 'json-stream');
+
 if (Object.keys(broken).length) {
   args.push('--grep');
   args.push(Object.keys(broken).map(quote).join('|'));

@@ -4,6 +4,7 @@
   "repository": "segmentio/mocha-broken",
   "description": "Only run previously broken mocha tests",
   "dependencies": {
+    "minimist": "^0.1.0",
     "mocha": "^1.18.2",
     "quotemeta": "0.0.0",
     "split": "^0.3.0"

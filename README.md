@@ -27,9 +27,16 @@ $ mocha-broken
 
   Once all tests pass, all are executed again.
 
+## Passing arguments to mocha
+
+  Arguments after `--` are passed to mocha:
+
+```bash
+$ mocha-broken -- --compilers coffee:coffee-script/register
+```
+
 ## TODO
 
-* pass flags and options to mocha
 * support mocha reporters
 
 ## Installation
