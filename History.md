@@ -1,4 +1,10 @@
 
+0.2.0 / 2014-06-11
+==================
+
+ * Update readme with documentation for --
+ * Pass arguments after -- to mocha
+
 0.1.1 / 2014-04-18
 ==================
 
