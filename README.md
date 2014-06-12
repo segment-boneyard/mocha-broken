@@ -11,7 +11,7 @@
 ```bash
 $ mocha-broken
 1..2
-not ok 1 works fine
+ok 1 works fine
 not ok 2 should 500 on req
   Error: expected 500 "Internal Server Error", got 302 "Moved Temporarily"
 
