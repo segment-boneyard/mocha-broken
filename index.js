@@ -9,7 +9,7 @@ var join = require('path').join;
 
 var broken = [];
 var bin = join(require.resolve('mocha'), '..', 'bin', 'mocha');
-var filename = join(process.cwd(), '.mocha-broken')
+var filename = join(process.cwd(), '.mocha-broken');
 
 try {
   broken = JSON.parse(fs.readFileSync(filename, 'utf8'));
@@ -26,12 +26,12 @@ if (broken.length) {
 var ps = spawn(bin, args);
 var tap = parser();
 
-ps.stdout.on('data', function(line){ process.stdout.write(line.toString()) })
-ps.stdout.pipe(tap)
+ps.stdout.on('data', function(line){ process.stdout.write(line.toString()); });
+ps.stdout.pipe(tap);
 
 tap.on('results', function(results){
   if (results.fail.length) {
-    fs.writeFileSync(filename, JSON.stringify(results.fail))
+    fs.writeFileSync(filename, JSON.stringify(results.fail));
   } else {
     try {
       fs.unlinkSync(filename);
