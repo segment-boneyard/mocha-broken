@@ -1,50 +1,44 @@
 #!/usr/bin/env node
 
 var spawn = require('child_process').spawn;
-var split = require('split');
 var argv = require('minimist')(process.argv.slice(2), { '--': true });
 var fs = require('fs');
 var quote = require('quotemeta');
+var parser = require('tap-parser');
 var join = require('path').join;
 
-var broken = {};
+var broken = [];
 var bin = join(require.resolve('mocha'), '..', 'bin', 'mocha');
-var filename = process.cwd() + '/.mocha-broken';
+var filename = join(process.cwd(), '.mocha-broken');
 
 try {
   broken = JSON.parse(fs.readFileSync(filename, 'utf8'));
 } catch (_) {}
 
 var args = argv['--'] || [];
-args.push('--reporter', 'json-stream');
+args.push('--reporter', 'tap');
 
-if (Object.keys(broken).length) {
+if (broken.length) {
   args.push('--grep');
-  args.push(Object.keys(broken).map(quote).join('|'));
+  args.push(broken.map(function(test){ return test.name; }).join('|'));
 }
 
 var ps = spawn(bin, args);
-ps.stdout.pipe(split()).on('data', function(line){
-  console.log(line);
+var tap = parser();
 
-  var update = JSON.parse(line);
-  var type = update[0];
-  var test = update[1];
-  var title = test.title;
+ps.stdout.on('data', function(line){ process.stdout.write(line.toString()); });
+ps.stdout.pipe(tap);
 
-  if ('start' == type) return;
-  if ('pass' == type) return delete broken[title];
-  if ('fail' == type) return broken[title] = true;
-  if ('end' == type) {
-    if (Object.keys(broken).length) {
-      fs.writeFileSync(filename, JSON.stringify(broken));
-    } else {
-      try {
-        fs.unlinkSync(filename);
-      } catch (_) {}
-    }
+tap.on('results', function(results){
+  if (results.fail.length) {
+    fs.writeFileSync(filename, JSON.stringify(results.fail));
+  } else {
+    try {
+      fs.unlinkSync(filename);
+    } catch (_) {}
   }
 });
+
 ps.stderr.pipe(process.stderr);
 ps.on('exit', function(code){
   process.exit(code);
